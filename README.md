@@ -20,6 +20,7 @@ Flags:
 exit status 1
 ```
 -detailed usage
+```
 ╭─gauavsablok@gauravsablok ~/Desktop/go/go-longread-canvas ‹main●›
 ╰─$ go run main.go -L sample.fastq -P pattern.txt
 The canavssed reads have been written
