@@ -1,6 +1,6 @@
 # go-longread-canvas
 
-- trimmomatic for the long reads. 
+- trimmomatic for the long reads, no heap memory allocation required, runs on goroutines and later adding the waitgroup. 
 - give a pattern files and ports the goroutines for the long reads. 
 
 ```
