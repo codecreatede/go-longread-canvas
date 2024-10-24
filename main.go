@@ -17,6 +17,7 @@ A golang implementation of the pacbioHifiFilt
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -114,7 +115,7 @@ func joinFunc(cmd *cobra.Command, args []string) {
 				id:    fID[i],
 				seq:   fSeq[j],
 				start: strings.Index(fSeq[i], patterns[j]),
-				end:   strings.Index(fSeq[i], patterns[j]),
+				end:   strings.Index(fSeq[i], patterns[j]) + len(patterns[j]),
 			})
 		}
 	}
@@ -157,4 +158,14 @@ func joinFunc(cmd *cobra.Command, args []string) {
 			joinSeq: strings.Join(joinCapture, ""),
 		})
 	}
+
+	file, err := os.Create("canvased.fastq")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	for i := range pJoinAppend {
+		file.WriteString("@" + pJoinAppend[i].id + "\n" + pJoinAppend[i].joinSeq + "\n")
+	}
+	fmt.Println("The canavssed reads have been written")
 }
